@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import Card from "../countryCard";
 import InputForm from "../form";
 import NavBar from "../navBar";

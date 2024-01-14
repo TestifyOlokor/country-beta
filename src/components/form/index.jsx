@@ -16,8 +16,20 @@ const InputForm = ({ countriesData, setCountriesData, isCurrentDark }) => {
   });
 
   useEffect(() => {
+    const handleFilter = async () => {
+      try {
+        const data = await fetchJsonDataApi();
+
+        const filtered = data.filter(
+          (country) => country.region === regionValue.Region
+        );
+        setCountriesData(filtered);
+      } catch (error) {
+        console.error("Error fetching or filtering data:", error);
+      }
+    };
     handleFilter();
-  }, [regionValue.Region]);
+  }, [regionValue.Region, setCountriesData]);
 
   useEffect(() => {
     const regionsSet = new Set(
@@ -25,19 +37,6 @@ const InputForm = ({ countriesData, setCountriesData, isCurrentDark }) => {
     );
     setUniqueRegions(Array.from(regionsSet));
   }, [countriesData]);
-
-  const handleFilter = async () => {
-    try {
-      const data = await fetchJsonDataApi();
-
-      const filtered = data.filter(
-        (country) => country.region === regionValue.Region
-      );
-      setCountriesData(filtered);
-    } catch (error) {
-      console.error("Error fetching or filtering data:", error);
-    }
-  };
 
   const handleRegionInputChange = (event) => {
     const target = event.target;

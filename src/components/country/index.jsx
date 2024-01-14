@@ -46,7 +46,7 @@ const Country = ({ theme, setTheme }) => {
           </div>
           <div className="country-display-card">
             <div className="country-display-image">
-              <img src={countryDetails?.flag} />
+              <img src={countryDetails?.flag} alt="" />
             </div>
             <div className="country-display-details">
               <h1>{countryDetails?.name}</h1>
