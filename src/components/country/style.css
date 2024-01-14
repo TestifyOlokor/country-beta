@@ -1,0 +1,106 @@
+.country-display-card-container {
+  width: 90%;
+  margin: 0 auto;
+  padding-top: 8rem;
+}
+.card-cntr-back {
+  display: flex;
+  flex-direction: row;
+  width: 4.5%;
+  justify-content: space-between;
+  margin-top: 1rem;
+  cursor: pointer;
+}
+.re-cnt {
+  height: 100vh;
+}
+.card-cntr-back img {
+  margin-top: 1rem;
+  width: 80%;
+}
+.country-display-card-container p {
+  font-family: "Nunito Sans", sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  text-align: left;
+  line-height: 1rem;
+}
+.country-display-card-container .country-display-card {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+  margin-top: 4rem;
+}
+
+.country-display-card-container .country-display-card .country-display-image {
+  width: 45%;
+  height: 401px;
+}
+
+.country-display-card-container
+  .country-display-card
+  .country-display-image
+  img {
+  width: 100%;
+  border-radius: 5px;
+  height: 100%;
+}
+
+.country-display-card-container .country-display-card .country-display-details {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  text-align: left;
+}
+
+.country-display-card-container
+  .country-display-card
+  .country-display-details
+  h1 {
+  margin-left: 1rem;
+  margin-top: 3rem;
+  font-family: "Nunito Sans", sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+  text-align: left;
+}
+
+.country-display-details-min {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-left: 1rem;
+}
+
+.brder {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-left: 1rem;
+  margin-top: 2rem;
+}
+
+.brder-cntr {
+  display: flex;
+  flex-direction: row;
+  width: 40%;
+  justify-content: space-between;
+  margin-right: 15rem;
+}
+
+.brder-cnt {
+  width: 25%;
+  margin-right: 1rem;
+}
+
+.brder-cnt p {
+  padding: 0.2rem 0.2rem;
+  width: 100%;
+  border-radius: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  font-family: "Nunito Sans", sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  text-align: center;
+}

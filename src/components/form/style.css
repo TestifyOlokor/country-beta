@@ -1,0 +1,46 @@
+h4 {
+  font-size: 16px;
+  letter-spacing: 1px;
+}
+
+.input {
+  margin-top: 3rem;
+  padding: 0.9rem;
+  border-radius: 5px;
+  border: 1px solid #ffffff;
+}
+
+form {
+  display: flex;
+  flex-direction: row;
+  width: 90%;
+  justify-content: space-between;
+  margin: 0 auto;
+}
+
+form .input-label {
+  width: 30%;
+}
+
+form .input-label input {
+  box-shadow: 1px 2px 4px 2px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  width: 100%;
+}
+
+form .select-label {
+  width: 15%;
+}
+
+form .select-label select {
+  box-shadow: 1px 2px 4px 2px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  width: 100%;
+}
+
+.search-icon-container {
+  position: absolute;
+  left: 28rem;
+  top: 17.5%;
+  transform: translateY(-50%);
+}

@@ -1,0 +1,45 @@
+.countries-container {
+  width: 22%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  margin-top: 2rem;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.countries-container .card-flag {
+  width: 100%;
+  height: 55%;
+}
+
+.countries-container .card-flag img {
+  width: inherit;
+  height: 100%;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+}
+
+.country-content {
+  width: 85%;
+  margin: 0 auto;
+}
+
+.country-content h1 {
+  font-family: "Nunito Sans", sans-serif;
+  font-weight: 900;
+  font-size: 18px;
+  text-align: left;
+}
+
+.country-content p {
+  font-family: "Nunito Sans", sans-serif;
+  line-height: 10px;
+  font-size: 14px;
+  text-align: left;
+}
+.country-content span {
+  font-family: "Nunito Sans", sans-serif;
+  font-weight: 600;
+  line-height: 10px;
+  font-size: 14px;
+  text-align: left;
+}
