@@ -1,11 +1,32 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Card from "../countryCard";
 import InputForm from "../form";
 import NavBar from "../navBar";
+import { db } from "../../firebase";
+import { collection, getDocs } from "@firebase/firestore";
 import "./style.scss";
 
 const LandingPage = ({ theme, setTheme }) => {
   const [countriesData, setCountriesData] = useState();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const countriesCollection = collection(db, "countries");
+        const countriesSnapshot = await getDocs(countriesCollection);
+        const countries = countriesSnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setCountriesData(countries);
+        console.log("test:", countries);
+      } catch (error) {
+        console.error("Error fetching countries:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const isCurrentDark = theme === "dark";
 
@@ -20,7 +41,11 @@ const LandingPage = ({ theme, setTheme }) => {
             countriesData={countriesData}
           />
         </div>
-        <div className={isCurrentDark ? "dark-theme" : "light-theme"}>
+        <div
+          className={`input-yun ${
+            isCurrentDark ? "dark-theme" : "light-theme"
+          }`}
+        >
           <div className="card-container">
             <Card
               setCountriesData={setCountriesData}

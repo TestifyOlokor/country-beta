@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { fetchJsonDataApi } from "../../store/api/countryQuery";
 import Card from "../countryCard";
 import "./style.css";
 import Search from "../../assets/images/search.svg";
 
 const InputForm = ({ countriesData, setCountriesData, isCurrentDark }) => {
+  console.log("dd", countriesData);
   const [uniqueRegions, setUniqueRegions] = useState([]);
 
   const [value, setValue] = useState({
@@ -14,29 +14,25 @@ const InputForm = ({ countriesData, setCountriesData, isCurrentDark }) => {
   const [regionValue, setRegionValue] = useState({
     Region: "",
   });
-
-  useEffect(() => {
-    const handleFilter = async () => {
-      try {
-        const data = await fetchJsonDataApi();
-
-        const filtered = data.filter(
-          (country) => country.region === regionValue.Region
-        );
-        setCountriesData(filtered);
-      } catch (error) {
-        console.error("Error fetching or filtering data:", error);
-      }
-    };
-    handleFilter();
-  }, [regionValue.Region, setCountriesData]);
+  console.log("Error", regionValue.Region);
 
   useEffect(() => {
     const regionsSet = new Set(
-      countriesData?.map((country) => country?.region)
+      countriesData?.map((country) => country?.countryName?.region)
     );
     setUniqueRegions(Array.from(regionsSet));
+    console.log("region:", Array.from(regionsSet));
   }, [countriesData]);
+
+  const handleFilter = () => {
+    const data = countriesData;
+    console.log("filter", regionValue?.Region, data[0]?.countryName?.region);
+    const filtered = data?.filter(
+      (country) => country?.countryName?.region === regionValue?.Region
+    );
+    console.log("fff", filtered);
+    setCountriesData(filtered);
+  };
 
   const handleRegionInputChange = (event) => {
     const target = event.target;
@@ -45,18 +41,18 @@ const InputForm = ({ countriesData, setCountriesData, isCurrentDark }) => {
       ...regionValue,
       [name]: target.value,
     });
+    handleFilter();
   };
 
-  const handleSearch = async () => {
-    try {
-      const data = await fetchJsonDataApi();
-      const filtered = data.filter((country) =>
-        country.name.toLowerCase().includes(value.Country.toLowerCase())
-      );
-      setCountriesData(filtered);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
+  const handleSearch = () => {
+    const data = countriesData;
+    console.log("rile:", data.countryName?.name);
+    const filtered = data.filter((country) =>
+      country?.countryName?.name
+        .toLowerCase()
+        .includes(value.Country.toLowerCase())
+    );
+    setCountriesData(filtered);
   };
 
   const handleInputChange = (event) => {
