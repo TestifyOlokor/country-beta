@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import "./style.css";
 
-const Card = ({ countriesData, setCountriesData }) => {
+const Card = ({ countriesData, countries }) => {
   const navigate = useNavigate();
 
   const handleClick = (id) => {
@@ -11,9 +11,11 @@ const Card = ({ countriesData, setCountriesData }) => {
   };
   console.log("test:", countriesData);
 
+  const displayData = countries?.length > 0 ? countries : countriesData;
+
   return (
     <>
-      {countriesData?.map((country) => (
+      {displayData?.map((country) => (
         <div
           key={country?.name}
           className="countries-container"

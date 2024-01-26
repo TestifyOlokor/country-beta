@@ -8,6 +8,7 @@ import "./style.scss";
 
 const LandingPage = ({ theme, setTheme }) => {
   const [countriesData, setCountriesData] = useState();
+  const [filteredCountries, setFilteredCountries] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -39,6 +40,8 @@ const LandingPage = ({ theme, setTheme }) => {
             isCurrentDark={isCurrentDark}
             setCountriesData={setCountriesData}
             countriesData={countriesData}
+            filteredCountries={filteredCountries}
+            setFilteredCountries={setFilteredCountries}
           />
         </div>
         <div
@@ -50,6 +53,7 @@ const LandingPage = ({ theme, setTheme }) => {
             <Card
               setCountriesData={setCountriesData}
               countriesData={countriesData}
+              countries={filteredCountries}
             />
           </div>
         </div>

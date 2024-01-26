@@ -2,28 +2,46 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import BackArrow from "../../assets/images/call-made.svg";
 import NavBar from "../navBar/index";
-import { fetchJsonDataApis } from "../../store/api/countryQuery";
+import { getDoc, doc } from "firebase/firestore";
+import { db } from "../../firebase";
 import "./style.css";
 
 const Country = ({ theme, setTheme }) => {
-  const [countryDetails, setCountryDetails] = useState(null);
+  const [countryDetails, setCountryDetails] = useState();
   const { id } = useParams();
   const navigate = useNavigate();
 
   const isCurrentDark = theme === "dark";
 
+  const fetchCountryDetails = async (id) => {
+    const countryDocRef = doc(db, "countries", id);
+    try {
+      const countryDocSnapshot = await getDoc(countryDocRef);
+      if (countryDocSnapshot.exists()) {
+        return countryDocSnapshot.data();
+      } else {
+        throw new Error("Country not found");
+      }
+    } catch (error) {
+      throw new Error("Error fetching country details: " + error.message);
+    }
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await fetchJsonDataApis(id);
+        const data = await fetchCountryDetails(id);
+        console.error("sssss", data);
         setCountryDetails(data);
       } catch (error) {
-        console.error("Error fetching country details:", error);
+        console.error(error);
       }
     };
 
     fetchData();
   }, [id]);
+
+  console.error("vvvvv", countryDetails);
 
   if (!countryDetails) {
     return <div>Loading...</div>;
@@ -46,41 +64,44 @@ const Country = ({ theme, setTheme }) => {
           </div>
           <div className="country-display-card">
             <div className="country-display-image">
-              <img src={countryDetails?.flag} alt="" />
+              <img src={countryDetails?.countryName?.flag} alt="" />
             </div>
             <div className="country-display-details">
-              <h1>{countryDetails?.name}</h1>
+              <h1>{countryDetails?.countryName?.name}</h1>
 
               <div className="country-display-details-min">
                 <div className="country-content">
                   <p>
-                    <span>Native Name:</span> {countryDetails?.nativeName}
+                    <span>Native Name:</span>{" "}
+                    {countryDetails?.countryName?.nativeName}
                   </p>
                   <p>
                     <span>Population:</span>{" "}
-                    {countryDetails?.population.toLocaleString()}
+                    {countryDetails?.countryName?.population.toLocaleString()}
                   </p>
                   <p>
-                    <span>Region:</span> {countryDetails?.region}
+                    <span>Region:</span> {countryDetails?.countryName?.region}
                   </p>
                   <p>
-                    <span>Sub Region:</span> {countryDetails?.subregion}
+                    <span>Sub Region:</span>{" "}
+                    {countryDetails?.countryName?.subregion}
                   </p>
                   <p>
-                    <span>Capital:</span> {countryDetails?.capital}
+                    <span>Capital:</span> {countryDetails?.countryName?.capital}
                   </p>
                 </div>
                 <div className="country-content">
                   <p>
                     <span>Top Level Domain:</span>{" "}
-                    {countryDetails?.topLevelDomain[0]}
+                    {countryDetails?.countryName?.topLevelDomain[0]}
                   </p>
                   <p>
                     <span>Currencies:</span>{" "}
-                    {countryDetails?.currencies[0]?.code}
+                    {countryDetails?.countryName?.currencies[0]?.code}
                   </p>
                   <p>
-                    <span>Languages:</span> {countryDetails?.languages[0]?.name}
+                    <span>Languages:</span>{" "}
+                    {countryDetails?.countryName?.languages[0]?.name}
                   </p>
                 </div>
               </div>

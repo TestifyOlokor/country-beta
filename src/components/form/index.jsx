@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from "react";
-import Card from "../countryCard";
 import "./style.css";
 import Search from "../../assets/images/search.svg";
 
-const InputForm = ({ countriesData, setCountriesData, isCurrentDark }) => {
+const InputForm = ({
+  countriesData,
+  filteredCountries,
+  setFilteredCountries,
+  isCurrentDark,
+}) => {
   console.log("dd", countriesData);
   const [uniqueRegions, setUniqueRegions] = useState([]);
 
@@ -24,14 +28,25 @@ const InputForm = ({ countriesData, setCountriesData, isCurrentDark }) => {
     console.log("region:", Array.from(regionsSet));
   }, [countriesData]);
 
-  const handleFilter = () => {
+  const handleFilterAndSearch = (valueRe) => {
+    console.log("ddd", valueRe);
     const data = countriesData;
-    console.log("filter", regionValue?.Region, data[0]?.countryName?.region);
-    const filtered = data?.filter(
-      (country) => country?.countryName?.region === regionValue?.Region
-    );
-    console.log("fff", filtered);
-    setCountriesData(filtered);
+    const filtered = data?.filter((country) => {
+      const matchesRegion =
+        valueRe === "" || country?.countryName?.region === valueRe;
+      const matchesSearch =
+        valueRe === "" ||
+        country?.countryName?.name
+          .toLowerCase()
+          .includes(valueRe.toLowerCase());
+      console.log("rn:", matchesSearch);
+
+      return matchesRegion || matchesSearch;
+    });
+
+    console.log("ddd1", filtered);
+
+    setFilteredCountries(filtered);
   };
 
   const handleRegionInputChange = (event) => {
@@ -41,18 +56,7 @@ const InputForm = ({ countriesData, setCountriesData, isCurrentDark }) => {
       ...regionValue,
       [name]: target.value,
     });
-    handleFilter();
-  };
-
-  const handleSearch = () => {
-    const data = countriesData;
-    console.log("rile:", data.countryName?.name);
-    const filtered = data.filter((country) =>
-      country?.countryName?.name
-        .toLowerCase()
-        .includes(value.Country.toLowerCase())
-    );
-    setCountriesData(filtered);
+    handleFilterAndSearch(target.value);
   };
 
   const handleInputChange = (event) => {
@@ -62,12 +66,14 @@ const InputForm = ({ countriesData, setCountriesData, isCurrentDark }) => {
       ...value,
       [name]: target.value,
     });
-    handleSearch();
+    console.log("reon:", target.value);
+
+    handleFilterAndSearch(target.value);
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    handleSearch();
+    // handleFilterAndSearch();
   };
 
   return (
@@ -102,7 +108,6 @@ const InputForm = ({ countriesData, setCountriesData, isCurrentDark }) => {
           </select>
         </label>
       </form>
-      <Card />
     </>
   );
 };
