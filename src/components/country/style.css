@@ -11,9 +11,9 @@
   margin-top: 1rem;
   cursor: pointer;
 }
-.re-cnt {
+/* .re-cnt {
   height: 100vh;
-}
+} */
 .card-cntr-back img {
   margin-top: 1rem;
   width: 80%;
@@ -103,4 +103,21 @@
   font-weight: 500;
   font-size: 14px;
   text-align: center;
+}
+
+@media screen and (max-width: 430px) {
+  .country-display-card-container .country-display-card {
+    flex-direction: column;
+  }
+  .country-display-card-container .country-display-card .country-display-image {
+    width: 100%;
+  }
+  .country-display-card-container
+    .country-display-card
+    .country-display-details {
+    width: 100%;
+  }
+  .country-display-card-container p {
+    font-size: 12px;
+  }
 }

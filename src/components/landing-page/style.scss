@@ -83,6 +83,16 @@ nav .navBar .navBar-drkBtn .drkBtn-Img {
 }
 
 
-// .input-yun{
-//   height: 100vh;
-// }
+@media screen and (max-width: 768px) {
+  nav .navBar .navBar-drkBtn{
+    width: 15%;
+  }
+}
+@media screen and (max-width: 430px) {
+  nav .navBar .navBar-drkBtn{
+    width: 26%;
+  }
+  p{
+    font-size: 12px;
+  }
+}

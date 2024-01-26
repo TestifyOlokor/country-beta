@@ -44,3 +44,12 @@ form .select-label select {
   top: 17.5%;
   transform: translateY(-50%);
 }
+
+@media screen and (max-width: 768px) {
+  .search-icon-container {
+    display: none;
+  }
+  form .select-label {
+    width: initial;
+  }
+}
