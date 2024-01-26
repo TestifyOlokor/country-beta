@@ -56,3 +56,10 @@
     height: 100%;
   }
 }
+
+@media screen and (max-width: 380px) {
+  .countries-container {
+    width: 100%;
+    margin-bottom: 2rem;
+  }
+}

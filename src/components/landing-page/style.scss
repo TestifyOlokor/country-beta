@@ -96,3 +96,13 @@ nav .navBar .navBar-drkBtn .drkBtn-Img {
     font-size: 12px;
   }
 }
+
+@media screen and (max-width: 380px) {
+  nav .navBar .navBar-drkBtn {
+    width: 24%;
+  }
+  nav .navBar p {
+    font-size: 12px;
+    margin-top: 1.1rem;
+  }
+}
