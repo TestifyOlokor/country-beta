@@ -3,12 +3,14 @@ import Card from "../countryCard";
 import InputForm from "../form";
 import NavBar from "../navBar";
 import { db } from "../../firebase";
+import ReactLoading from "react-loading";
 import { collection, getDocs } from "@firebase/firestore";
 import "./style.scss";
 
 const LandingPage = ({ theme, setTheme }) => {
   const [countriesData, setCountriesData] = useState();
   const [filteredCountries, setFilteredCountries] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -20,9 +22,11 @@ const LandingPage = ({ theme, setTheme }) => {
           ...doc.data(),
         }));
         setCountriesData(countries);
+        setLoading(false);
         console.log("test:", countries);
       } catch (error) {
         console.error("Error fetching countries:", error);
+        setLoading(false);
       }
     };
 
@@ -50,11 +54,20 @@ const LandingPage = ({ theme, setTheme }) => {
           }`}
         >
           <div className="card-container">
-            <Card
-              setCountriesData={setCountriesData}
-              countriesData={countriesData}
-              countries={filteredCountries}
-            />
+            {loading ? (
+              <ReactLoading
+                type="bars"
+                color="#282c34"
+                height={"40%"}
+                width={"100%"}
+              />
+            ) : (
+              <Card
+                setCountriesData={setCountriesData}
+                countriesData={countriesData}
+                countries={filteredCountries}
+              />
+            )}
           </div>
         </div>
       </section>

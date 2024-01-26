@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import BackArrow from "../../assets/images/call-made.svg";
 import NavBar from "../navBar/index";
+import ReactLoading from "react-loading";
 import { getDoc, doc } from "firebase/firestore";
 import { db } from "../../firebase";
 import "./style.css";
@@ -44,7 +45,9 @@ const Country = ({ theme, setTheme }) => {
   console.error("vvvvv", countryDetails);
 
   if (!countryDetails) {
-    return <div>Loading...</div>;
+    return (
+      <ReactLoading type="bars" color="#282c34" height={"40%"} width={"100%"} />
+    );
   }
   const handleBackClick = () => {
     navigate(-1);
